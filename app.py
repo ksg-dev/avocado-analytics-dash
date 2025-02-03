@@ -9,6 +9,7 @@ data = (
     .sort_values(by="Date")
 )
 
+# These will populate dropdowns
 regions = data["region"].sort_values().unique()
 avocado_types = data["type"].sort_values().unique()
 
@@ -31,6 +32,7 @@ app.title = "Avocado Analytics: Know Your Avocados"
 # Define layout property of app, this is translated into html
 app.layout = html.Div(
     children=[
+        # Header div
         html.Div(
             children=[
                 html.P(
@@ -52,6 +54,7 @@ app.layout = html.Div(
         # Add in filters for graphs, drop downs and date picker examples
         html.Div(
             children=[
+                # region filter menu
                 html.Div(
                     children=[
                         html.Div(children="Region", className="menu-title"),
@@ -61,12 +64,15 @@ app.layout = html.Div(
                                 {"label": region, "value": region}
                                 for region in regions
                             ],
+                            # default value when page loads
                             value="Albany",
+                            # user able to leave empty is False
                             clearable=False,
                             className="dropdown",
                         ),
                     ]
                 ),
+                # type filter menu
                 html.Div(
                     children=[
                         html.Div(children="Type", className="menu-title"),
@@ -79,13 +85,16 @@ app.layout = html.Div(
                                 }
                                 for avocado_type in avocado_types
                             ],
+                            # default value when page loads
                             value="organic",
+                            # user able to leave blank is False
                             clearable=False,
                             searchable=False,
                             className="dropdown",
                         ),
                     ],
                 ),
+                # date range, start, end date filter menu
                 html.Div(
                     children=[
                         html.Div(
@@ -126,13 +135,18 @@ app.layout = html.Div(
     ]
 )
 
+# This decorator triggers function when input changes to update graphs
+# For outputs - takes id of elements they'll modify when function executes, and property of element to be modified
+# For inputs - take id of elements they'll be watching for changes, and property of watched element they'll be watching for changes
 @app.callback(
+    # so this will update 'figure' property of 'price-chart' element, etc
     Output("price-chart", "figure"),
     Output("volume-chart", "figure"),
+    # and this will watch the 'region-filter' element, and its 'value' property for changes
     Input("region-filter", "value"),
     Input("type-filter", "value"),
-    Input("date-range", "start-date"),
-    Input("date-range", "end-date"),
+    Input("date-range", "start_date"),
+    Input("date-range", "end_date"),
 )
 
 
