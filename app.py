@@ -13,10 +13,12 @@ data = (
 # Initialize Dash app
 app = Dash(__name__)
 
-# Define layout property of app
+# Define layout property of app, this is translated into html
 app.layout = html.Div(
     children=[
-        html.H1(children="Avocado Analytics"),
+        html.H1(
+            children="Avocado Analytics",
+            className="header-title"),
         html.P(
             children=(
                 "Analyze the bahavior of avocado prices and the number"
