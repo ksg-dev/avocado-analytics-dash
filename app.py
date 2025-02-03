@@ -29,14 +29,23 @@ app.title = "Avocado Analytics: Know Your Avocados"
 # Define layout property of app, this is translated into html
 app.layout = html.Div(
     children=[
-        html.H1(
-            children="Avocado Analytics",
-            className="header-title"),
-        html.P(
-            children=(
-                "Analyze the bahavior of avocado prices and the number"
-                " of avocados sold in the US between 2015 and 2018"
-            ),
+        html.Div(
+            children=[
+                html.P(
+                    children="🥑", className="header-emoji"
+                ),
+                html.H1(
+                    children="Avocado Analytics",
+                    className="header-title"),
+                html.P(
+                    children=(
+                        "Analyze the behavior of avocado prices and the number"
+                        " of avocados sold in the US between 2015 and 2018"
+                    ),
+                    className="header-description",
+                ),
+            ],
+            className="header",
         ),
         dcc.Graph(
             figure={
