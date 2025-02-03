@@ -10,8 +10,21 @@ data = (
     .sort_values(by="Date")
 )
 
-# Initialize Dash app
-app = Dash(__name__)
+# Point to external stylesheet
+external_stylesheets = [
+    {
+        "href": (
+            "https://fonts.googleapis.com/css2?"
+            "family=Lato:wght@400;700&display=swap"
+        ),
+        "rel": "stylesheet",
+    },
+]
+
+# Initialize Dash app, include external styling
+app = Dash(__name__, external_stylesheets=external_stylesheets)
+# Add title to app
+app.title = "Avocado Analytics: Know Your Avocados"
 
 # Define layout property of app, this is translated into html
 app.layout = html.Div(
